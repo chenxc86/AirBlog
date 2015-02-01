@@ -1,0 +1,71 @@
+body {
+    background-color: #eaedee;
+    padding-bottom: 50px;
+    padding-top: 50px;
+}
+
+/*
+修改container类最大宽度为960像素
+*/
+.container {
+    max-width: 960px;
+}
+
+/*
+文章发布日期样式
+*/
+.article-date {
+    width: 60px;
+    height: 60px;
+    background-color: #d9534f;
+    float: left;
+    margin-right: 15px;
+}
+
+.article-date span {
+    display: block;
+    color: white;
+    text-align: center;
+}
+
+.article-date span.month {
+    padding-top: 5px;
+}
+
+.article-date span.day {
+    font-size: 20px;
+}
+
+/*
+Markdown 内容居中样式
+*/
+div.markdown img {
+    display: block;
+    clear: both;
+    margin: auto;
+    max-width: 100%;
+    height: auto;
+}
+
+/*
+页脚样式
+*/
+footer {
+    background-color: #373737;
+    color: #bfbfbf;
+    margin: 5em 0 0;
+    padding: 30px 0 0;
+    clear: both;
+}
+
+.sitemap {
+    margin: 0 auto;
+    min-height: 220px;
+    position: relative;
+}
+
+.license {
+    background-color: #2a2a2a;
+    clear: both;
+    padding: 0.5em 0;
+}

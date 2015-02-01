@@ -1,0 +1,33 @@
+{% extends "blog_base.html" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+{# 引入 自定义 markdown 解析模版标签过滤器 #}
+{% load django_markdown %}
+{# 引入多说评论系统模版标签 #}
+{% load duoshuo_tags %}
+
+{% block content %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <h2>{{ article.title }}</h2>
+    <p>
+      {{ article.publish_time|date:"Y年m月d日 H时i" }}
+      | 分类 : <a href="{% url "blog:filter_category" article.category.id %}"><strong>{{ article.category.name }}</strong></a>
+      | 标签 :
+      {% for tag in article.tag.all %}
+      <a href="{% url "blog:filter_tag" tag.id %}"><span class="label label-default">{{ tag.tag_name }}</span></a>
+      {% endfor %}
+    </p>
+    <hr />
+    <div class="markdown">
+      {{ article.content|to_markdown:"codehilite" }}
+    </div>
+  </div>
+</div>
+<div class="panel panel-default">
+  <div class="panel-body">
+    {% duoshuo_comments %}
+  </div>
+</div>
+{% endblock %}

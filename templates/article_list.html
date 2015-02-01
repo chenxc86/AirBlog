@@ -1,0 +1,45 @@
+{% extends "blog_base.html" %}
+
+{% block title %} 文章列表 {% endblock %}
+
+{% block inCSS %}{% endblock %}
+
+{# 引入 自定义 markdown 解析模版标签过滤器 #}
+{% load django_markdown %}
+{# 加载 分页系统的模版标签 #}
+{% load pagination_tags %}
+
+{% block content %}
+{# 为分页系统指定要进行分页的对象 #}
+{% autopaginate articles 5 %}
+{% for article in articles %}
+{% ifequal article.status "0" %}
+<div class="panel panel-default">
+  <div class="panel-body">
+    <div class="article-date">
+        <span class="month">{{ article.publish_time.month }}月</span>
+        <span class="day">{{ article.publish_time.day }}</span>
+    </div>
+    <h2 style="text-align: center;"><a href="{% url "blog:article_detail" article.id %}">{{ article.title }}</a></h2>
+    <p style="text-align: center;">
+        分类 : <a href="{% url "blog:filter_category" article.category.id %}"><strong>{{ article.category.name}}</strong></a>
+      | 标签 :
+      {% for tag in article.tag.all %}
+      <a href="{% url "blog:filter_tag" tag.id %}"><span class="label label-default">{{ tag.tag_name }}</span></a>
+      {% endfor %}
+    </p>
+    <hr />
+    <div class="markdown">
+      <p>{{ article.content|truncatechars:300|to_markdown:"codehilite" }}</p>
+    </div>
+    <hr />
+    <p>
+        最后更新日期 : {{ article.update_time | date:"Y年m月d日 H时i" }} | 热度 : {{ article.heat }} °C
+    </p>
+  </div>
+</div>
+{% endifequal %}
+{% endfor %}
+{# 分页系统提供的分页导航栏 #}
+{% paginate %}
+{% endblock %}

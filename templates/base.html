@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="记录工作、生活，重点关注Python、运维技术、网络技术">
+    <meta name="keywords" content="python,linux,web开发,运维,网络,旅行,摄影,玩具,电影">
+    <meta name="author" content="airblog-chenxc">
+    <title>{% block title %} 网站基础模版 {% endblock %}</title>
+
+    <link rel="icon" href="/static/img/favicon.ico" mce_href="/dir/favicon.ico" type="image/x-icon">
+
+    <!-- External CSS -->
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    {% block externalCSS %}
+    <link href="/static/css/mystyle.css" rel="stylesheet">
+    <link href="/static/css/code.css" rel="stylesheet">
+    {% endblock %}
+    <!-- In-document CSS -->
+    {% block inCSS %}{% endblock %}
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="container">
+      <img src="/static/img/mario.jpg" style="height:auto; max-width:100%;" />
+      <!-- 站点导航栏 -->
+      <nav class="navbar navbar-inverse" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse">
+              <span class="sr-only">Toggle navigation</span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{% url "blog:index" %}">{% block navbra %} Airblog {% endblock %}</a>
+          </div>
+          <div class="collapse navbar-collapse" id="navbar-collapse">
+            <ul class="nav navbar-nav">
+              {% block nav %}
+              <li class="active"><a href="{% url "blog:index" %}">首页</a></li>
+              <li><a href="{% url "blog:about" %}">关于</a></li>
+              {% endblock %}
+            </ul>
+            <form class="navbar-form navbar-right" role="search" action="{% url "blog:search" %}" method="get">
+              <div class="form-group">
+                <input type="text" class="form-control" name="query" placeholder="站内搜索">
+              </div>
+              <button type="submit" class="btn btn-default"><strong>GO</strong></button>
+            </form>
+          </div>
+        </div>
+      </nav>
+      <!-- 站点导航栏结束 -->
+      {% if query %}
+      <div class="alert alert-warning" role="alert">{{ query }}</div>
+      {% endif %}
+      <!-- 站点主内容区域-->
+      <div class="row">
+        {% block mainarea %}{% endblock %}
+      </div>
+      <!-- 站点主内容区域结束 -->
+
+      <!-- 站点页脚部分 -->
+      {% block footer %}
+        {% include "footer.html" %}
+      {% endblock %}
+      <!-- 站点页脚部分结束 -->
+    </div>
+
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    {% block externalJS %}
+    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    {% endblock %}
+    {% block inJS %}{% endblock %}
+  </body>
+</html>

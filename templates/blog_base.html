@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %} 博客相关页面基础模版 {% endblock %}
+
+{% block mainarea %}
+<!-- 站点主内容区域——左侧内容区域 -->
+<div class="col-md-9">
+  {% block content %}{% endblock %}
+</div>
+<!-- 站点主内容区域——左侧内容区域 结束 -->
+
+<!-- 站点主内容区域——右侧边栏 -->
+<div class="col-md-3">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p>关于博主</p>
+      <hr />
+      <p>微信号，欢迎关注:</p>
+      <div class="thumbnail">
+        <img src="/static/img/weixin.jpg"> 
+      </div>
+      <hr />
+      <p><a href="{% url "blog:about" %}" class="btn btn-primary" role="button">了解更多</a></p>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p>最近文章</p>
+      <hr />
+      {% for article in latest %}
+      <p>
+      <a href="{% url "blog:article_detail" article.id %}">{{ article.title }}</a>
+      <br />
+      {{ article.publish_time|date:"Y年m月d日 H时i分" }}
+      </p>
+      {% endfor %}
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <p>文章分类</p>
+      <hr />
+      <ul>
+        {% for category in categories %}
+        <li><a href="{% url "blog:filter_category" category.id %}">{{ category.name }} ({{ category.article_set.all.count }})</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+<!-- 站点主内容区域——右侧边栏 结束 -->
+{% endblock %}
