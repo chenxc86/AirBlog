@@ -28,6 +28,8 @@
 + pyzt 用于 Django 时区处理
 + Pillow 用于上传图片处理
 + MySQLdb 用于 Mysql 数据库操作
++ Pygments 用于代码高亮
++ Markdown2 用于markdown解析
 
 ## 项目截图
 ### 文章列表页截图
