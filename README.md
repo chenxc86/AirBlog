@@ -33,3 +33,4 @@
 ### 文章列表页截图
 ![文章列表页截图](https://github.com/chenxc86/Airblog/raw/master/static/img/文章列表页截图.png)
 ### 文章内容显示页截图
+![文章列表页截图](https://github.com/chenxc86/Airblog/raw/master/static/img/文章详情页截图.png)
