@@ -7,7 +7,7 @@ from django.db import models
 from django.db.models.fields.files import ImageFieldFile
 from django.contrib.auth.models import User
 import os
-from Airblog.settings import MEDIA_ROOT
+from django.conf import settings
 from utils.image_toolkit import make_thumb, del_image
 
 
@@ -125,7 +125,7 @@ class ArticleImages(Media):
         thumb_buf = make_thumb(self.image.path)
         if thumb_buf:
             relate_thumb_path = os.path.join('upload_images/thumb_images', base + '.thumb' + ext)
-            thumb_path = os.path.join(MEDIA_ROOT, relate_thumb_path)
+            thumb_path = os.path.join(settings.MEDIA_ROOT, relate_thumb_path)
             thumb_buf.save(thumb_path)
             self.thumb = ImageFieldFile(self, self.thumb, relate_thumb_path)
             super(ArticleImages, self).save()
