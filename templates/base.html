@@ -48,7 +48,7 @@
               <li><a href="{% url "blog:about" %}">关于</a></li>
               {% endblock %}
             </ul>
-            <form class="navbar-form navbar-right" role="search" action="{% url "blog:search" %}" method="get">
+            <form class="navbar-form navbar-right" role="search" action="{% url "blog:search" %}" method="get"> {% csrf_token %}
               <div class="form-group">
                 <input type="text" class="form-control" name="query" placeholder="站内搜索">
               </div>
