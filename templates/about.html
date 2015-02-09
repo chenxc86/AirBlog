@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load staticfiles %}
+
 {% block title %} 关于 {% endblock %}
 
 {% block inCSS %}
@@ -31,7 +33,7 @@
           <p>当然也可以通过首页的边栏扫描微信二维码关注我。</p>
         </div>
         <div class="col-md-4">
-          <img src="/static/img/me.jpg"  width="100%">
+          <img src="{% static "img/me.jpg" %}"  width="100%">
         </div>
       </div>
     </div>
