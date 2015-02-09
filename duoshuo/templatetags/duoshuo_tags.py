@@ -14,7 +14,7 @@ class DuoshuoCommentsNode(Node):
 
     def render(self, context):
         code = '''<!-- Duoshuo Comment BEGIN -->
-        <div class="ds-thread"></div>
+        <div class="ds-thread" data-thread-key="{{ article.id }}" data-title="{{ article.title }}"></div>
         <script type="text/javascript">
         var duoshuoQuery = {short_name:"%s"};
         (function() {
