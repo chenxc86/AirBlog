@@ -1,51 +1,43 @@
 # -*- coding:utf8 -*-
+"""Airblog 项目的 Django 配置文件。
 """
-Django settings for Airblog project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.7/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.7/ref/settings/
-"""
-
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+# 项目基础路径设置
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/1.7/howto/deployment/checklist/
+# 哈希Key
+SECRET_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 
-# SECURITY WARNING: don't run with debug turned on in production!
+# 项目运行模式
 DEBUG = True
 
-TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+# 项目访问控制列表
+ALLOWED_HOSTS = ['*']
 
 
-# Application definition
-
+# 应用注册
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'grappelli', # 用于美化 Django admin 后台
     'django.contrib.admin',
-    'duoshuo', # 集成多说应用
-    'pagination', # 集成分页应用
-    'blog', # 注册博客应用
+    'duoshuo', # 多说应用
+    'pagination', # 分页应用
+    'blog', # 博客应用
 )
 
+
+# 项目中间件
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.locale.LocaleMiddleware', # 设置 admin 组件显示中文
+    'django.middleware.locale.LocaleMiddleware', # 设置 admin 应用中文显示
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
@@ -54,31 +46,32 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware', # 设置分页
 )
 
+
+# 项目根 URL 配置文件
 ROOT_URLCONF = 'Airblog.urls'
 
+
+# 项目 WSGI 应用
 WSGI_APPLICATION = 'Airblog.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
+# 项目数据库设置
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'xxxxxx',
-        'USER': 'xxxxxx',
-        'PASSWORD': 'xxxxxx',
+        'NAME': 'Airblog',
+        'USER': 'username',
+        'PASSWORD': 'password',
         'HOST': '127.0.0.1',
         'PORT': '3306',
-    }
 }
 
-# Internationalization
-# https://docs.djangoproject.com/en/1.7/topics/i18n/
 
-# LANGUAGE_CODE = 'en-us'
+# 语言环境设置
 LANGUAGE_CODE = 'zh-cn'
-# TIME_ZONE = 'UTC'
+
+
+# 时区设置
 TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
@@ -88,29 +81,18 @@ USE_L10N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.7/howto/static-files/
+# 模板 debug 设置
+TEMPLATE_DEBUG = True
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static/') # 后添加，非默认配置
 
-STATIC_URL = '/static/'
-
-STATICFILES_DIRS = (
-    ('css', os.path.join(STATIC_ROOT, 'css')),
-    ('js', os.path.join(STATIC_ROOT, 'js')),
-    ('img', os.path.join(STATIC_ROOT, 'img')),
-) # 后添加，非默认配置
-
+# 模板搜索路径
 TEMPLATE_DIRS = (
     os.path.join(BASE_DIR, 'templates/'),
-) # 后添加，非默认配置
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/') # 后添加，非默认配置
-
-MEDIA_URL = '/media/' # 后添加，非默认配置
+)
 
 
-TEMPLATE_CONTEXT_PROCESSORS = (# 后添加，非默认配置
+# 模版渲染全局变量
+TEMPLATE_CONTEXT_PROCESSORS = (
     "django.contrib.auth.context_processors.auth",
     "django.core.context_processors.debug",
     "django.core.context_processors.i18n",
@@ -119,7 +101,41 @@ TEMPLATE_CONTEXT_PROCESSORS = (# 后添加，非默认配置
     "django.core.context_processors.static",
     "django.core.context_processors.tz",
     "django.contrib.messages.context_processors.messages",
-    )
+)
+
+
+# 静态文件设置
+STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+
+# 媒体文件设置
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
+# 日志设置
+if not DEBUG:
+    LOGGING = {
+        'version': 1,
+        'disable_existing_loggers': False,
+        'handlers': { # 处理
+            'file': {
+                'level': 'DEBUG',
+                'class': 'logging.FileHandler',
+                'filename': os.path.join(BASE_DIR, 'project.log'),
+                'mode': 'a',
+            },
+        },
+        'loggers': { # 日志记录器
+            'django.request': {
+                'handlers': ['file'],
+                'level': 'WARNING',
+                'propagate': False,
+            },
+        },
+    }
+
 
 # duoshuo 设置
 DUOSHUO_SECRET = 'xxxxx'
