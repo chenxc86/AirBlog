@@ -54,7 +54,7 @@ class ArticleListView(GlobalContextMixin, ArticleListMixin, ListView):
 
 
 class Search(ArticleListView):
-    """
+    """站内搜索（条件：关键字）
     """
     def get_queryset(self):
         search_form = SearchForm(self.request.GET)
