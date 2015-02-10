@@ -16,13 +16,14 @@
 + 文章评论
 
 ## 技术实现
-服务器端使用 : Python2.7 + Django1.7.1
+服务器端使用 : Python2.7 + Django1.7.3
 
 前端展示使用 : bootstrap3
 
 项目中集成第三方应用包括 :
 + django-pagination Django分页应用([项目主页](https://github.com/ericflo/django-pagination/))
 + duoshuo 评论系统应用([官方主页](http://duoshuo.com/))
++ grappelli 用于美化django admin样式和功能扩展
 
 项目中需要的 Python 扩展库支持包括 :
 + pyzt 用于 Django 时区处理
