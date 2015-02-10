@@ -56,14 +56,21 @@ WSGI_APPLICATION = 'Airblog.wsgi.application'
 
 
 # 项目数据库设置
+if DEBUG:
+    DB_ENGINE = 'django.db.backends.sqlite3'
+    DB_NAME = 'airblog.sqlite3'
+else:
+    DB_ENGINE = 'django.db.backends.mysql'
+    DB_NAME = 'Airblog'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'Airblog',
+        'ENGINE': DB_ENGINE,
+        'NAME': DB_NAME,
         'USER': 'username',
         'PASSWORD': 'password',
-        'HOST': '127.0.0.1',
-        'PORT': '3306',
+        'HOST': '', # sqlite3 不需要
+        'PORT': '', # sqlite3 不需要
     }
 }
 
