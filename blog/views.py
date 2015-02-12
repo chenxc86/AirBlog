@@ -52,7 +52,6 @@ class ArticleListView(GlobalContextMixin, ArticleListMixin, ListView):
         return super(ArticleListView, self).get_context_data(**global_context_data)
 
 
-
 class Search(ArticleListView):
     """站内搜索（条件：关键字）
     """
