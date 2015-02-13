@@ -150,6 +150,10 @@ if not DEBUG:
         },
     }
 
+# 
+GRAPPELLI_ADMIN_HEADLINE = 'Airblog' # 这里改成你项目的名称
+GRAPPELLI_ADMIN_TITLE = 'Airblog' # 这里改成你项目的名称
+
 
 # duoshuo 设置
 DUOSHUO_SECRET = 'xxxxx'
