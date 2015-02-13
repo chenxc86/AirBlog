@@ -115,14 +115,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 # 静态文件设置
 STATIC_URL = '/static/'
 
-#STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
 if DEBUG:
     STATICFILES_DIRS = (
         os.path.join(BASE_DIR, "static"),
     )
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
 
 # 媒体文件设置
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
@@ -149,6 +148,7 @@ if not DEBUG:
             },
         },
     }
+
 
 # 
 GRAPPELLI_ADMIN_HEADLINE = 'Airblog' # 这里改成你项目的名称
