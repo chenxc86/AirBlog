@@ -9,7 +9,7 @@ DUOSHUO_SECRET = getattr(settings, "DUOSHUO_SECRET", None)
 register = Library()
 
 class DuoshuoCommentsNode(Node):
-    def __init__(self, short_name=DUOSHUO_SHORT_NAME, data_thread_key, data_title):
+    def __init__(self, short_name, data_thread_key, data_title):
         self.short_name = short_name
         self.data_thread_key = template.Variable(data_thread_key) # 由于官方未及时对此项目进行维护，使用时报错，自行添加
                                                                   # data-thread-key 参数
