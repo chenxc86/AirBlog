@@ -37,3 +37,9 @@
 ![文章列表页截图](https://github.com/chenxc86/Airblog/raw/master/static/img/文章列表页截图.png)
 ### 文章内容显示页截图
 ![文章列表页截图](https://github.com/chenxc86/Airblog/raw/master/static/img/文章详情页截图.png)
+
+## 2015-02-21 修正多说插件BUG
++ 修改 duoshuo/templatetags/duoshuo_tags.py，增加两必要参数data-thread-key和data-title
++ 在文章详情页面中传入文章id和文章标题分别作为data-thread-key和data-title
+
+多说官方建议定义data-thread-key和data-title参数用于绑定评论至相应文章，但提供的Django插件中并未提供上述参数，所以有了这次修改。
