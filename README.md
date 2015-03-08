@@ -43,3 +43,11 @@
 + 在文章详情页面中传入文章id和文章标题分别作为data-thread-key和data-title
 
 多说官方建议定义data-thread-key和data-title参数用于绑定评论至相应文章，但提供的Django插件中并未提供上述参数，所以有了这次修改。
+
+## 2015-03-08 修正文章阅读量更新影响文章内容更新时间问题
+    :::python
+    file name: blog/models.py
+    class Article(models.Model):
+        ......
+        update_time = models.DateTimeField(auto_now=True, verbose_name=u"文章更新时间")
+删除 auto_now=True 参数，使文章被访问时阅读量字段计数增加后，文章内容更新时间不受影响，文章内容更新时间则需在后台更新时手动添加。
