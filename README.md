@@ -51,3 +51,10 @@
         ......
         update_time = models.DateTimeField(auto_now=True, verbose_name=u"文章更新时间")
 删除 auto_now=True 参数，使文章被访问时阅读量字段计数增加后，文章内容更新时间不受影响，文章内容更新时间则需在后台更新时手动添加。
+
+## 2015-04-22 修正了删除文章同时删除相应配图功能执行失败的问题。
+
+两个错误：
+
++ models.py 中 Article 类的delete方法中引用的 MEDIA_ROOT 变量有误，已更正。
++ delete 方法中 super() 调用时逻辑位置有误，已更正。
