@@ -76,10 +76,10 @@ class Article(models.Model):
         images_of_article = self.articleimages_set.all()
         if images_of_article:
             for image_of_article in images_of_article:
-                del_image(os.path.join(MEDIA_ROOT, image_of_article.image.name))
+                del_image(os.path.join(settings.MEDIA_ROOT, image_of_article.image.name))
                 if image_of_article.thumb:
-                    del_image(os.path.join(MEDIA_ROOT, image_of_article.thumb.name))
-                super(Article, self).delete()
+                    del_image(os.path.join(settings.MEDIA_ROOT, image_of_article.thumb.name))
+            super(Article, self).delete()
         else:
             super(Article, self).delete()
 
