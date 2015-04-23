@@ -16,7 +16,7 @@ class GlobalContextMixin(object):
     def get_global_context_data(self):
         global_context_data = dict()
         global_context_data['categories'] = Category.objects.all()
-        global_context_data['latest'] = Article.objects.all()[:10]
+        global_context_data['latest'] = Article.objects.filter(status='0')[:5]
 
         return global_context_data
 
@@ -104,6 +104,8 @@ class ArticleDetailView(GlobalContextMixin, DetailView):
 
     def get_object(self):
         object = super(ArticleDetailView, self).get_object()
+        if object.status == '1':
+            raise Http404
         object.heat += 1
         object.save()
         return object
