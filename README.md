@@ -61,5 +61,5 @@
 
 ## 2015-04-23 修正了标记为草稿的文章出现在边栏最新文章列表以及url中用文章id直接访问
 
-＋views.py GlobalContextMixin 中 global_context_data['latest'] = Article.objects.all()[:10] 修改为 global_context_data['latest'] = Article.objects.filter(status='0')[:5]
-＋ ArticleDetailView 试图类中的 get_object() 方法中增加文章对象的 status 字段判断逻辑。
++ views.py GlobalContextMixin 中 global_context_data['latest'] = Article.objects.all()[:10] 修改为 global_context_data['latest'] = Article.objects.filter(status='0')[:5]
++ ArticleDetailView 试图类中的 get_object() 方法中增加文章对象的 status 字段判断逻辑。
